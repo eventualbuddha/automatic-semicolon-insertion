@@ -8,12 +8,28 @@ Insert missing semicolons, remove unneeded ones.
 $ npm install [--save] automatic-semicolon-insertion
 ```
 
-## Usage
+If you're using an AST from babel (babylon) you can also install
+`ast-processor-babylon-config` to make it easier. Otherwise you'll have
+to implement the expected methods yourself.
 
-The main `lex` function simply returns a list of tokens:
+## Usage
 
 ```js
 import asi from 'automatic-semicolon-insertion';
+import buildConfig from 'ast-processor-babylon-config';
+import { parse } from 'babylon';
 
+let source = 'let a = class {}'; // should have a semicolon after it
+let ast = parse(source);
+let config = buildConfig(source, ast);
 
+asi(config);
+let { insertions, removals } = config;
+console.log({ insertions, removals });
+
+/*
+prints:
+
+{ insertions: [ { index: 16, content: ';' } ], removals: [] }
+*/
 ```
