@@ -1,6 +1,6 @@
 {
   "name": "automatic-semicolon-insertion",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Insert missing semicolons, remove unneeded ones.",
   "main": "dist/automatic-semicolon-insertion.js",
   "jsnext:main": "dist/automatic-semicolon-insertion.m.js",
