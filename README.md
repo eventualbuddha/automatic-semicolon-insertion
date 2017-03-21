@@ -1,5 +1,7 @@
 # automatic-semicolon-insertion [![Build Status](https://travis-ci.org/decaffeinate/coffee-lex.svg?branch=master)](https://travis-ci.org/decaffeinate/coffee-lex)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/eventualbuddha/automatic-semicolon-insertion.svg)](https://greenkeeper.io/)
+
 Insert missing semicolons, remove unneeded ones.
 
 ## Install
