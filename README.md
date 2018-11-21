@@ -1,31 +1,24 @@
-# automatic-semicolon-insertion [![Build Status](https://travis-ci.org/decaffeinate/coffee-lex.svg?branch=master)](https://travis-ci.org/decaffeinate/coffee-lex)
+# automatic-semicolon-insertion [![Build Status](https://travis-ci.org/eventualbuddha/automatic-semicolon-insertion.svg?branch=master)](https://travis-ci.org/eventualbuddha/automatic-semicolon-insertion)
 
 Insert missing semicolons, remove unneeded ones.
 
 ## Install
 
+```sh
+$ yarn add automatic-semicolon-insertion
+# or via npm
+$ npm install automatic-semicolon-insertion
 ```
-$ npm install [--save] automatic-semicolon-insertion
-```
-
-If you're using an AST from babel (babylon) you can also install
-`ast-processor-babylon-config` to make it easier. Otherwise you'll have
-to implement the expected methods yourself.
 
 ## Usage
 
 ```js
 import asi from 'automatic-semicolon-insertion';
-import buildConfig from 'ast-processor-babylon-config';
-import { parse } from 'babylon';
+import { parse } from '@babel/parser';
 
-let source = 'let a = class {}'; // should have a semicolon after it
-let ast = parse(source);
-let config = buildConfig(source, ast);
+const source = 'let a = class {}'; // should have a semicolon after it
 
-asi(config);
-let { insertions, removals } = config;
-console.log({ insertions, removals });
+console.log(asi(source, parse(source)));
 
 /*
 prints:

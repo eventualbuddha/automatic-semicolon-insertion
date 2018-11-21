@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es2015",
+    "module": "commonjs",
+    "typeRoots": ["node_modules/@types"],
+    "declaration": true,
+    "lib": ["es2015"],
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "downlevelIteration": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
