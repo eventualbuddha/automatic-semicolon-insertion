@@ -17,7 +17,8 @@
     "url": "git+https://github.com/eventualbuddha/automatic-semicolon-insertion.git"
   },
   "files": [
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/**/*.d.ts"
   ],
   "keywords": [
     "asi",
