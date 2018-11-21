@@ -1,14 +1,12 @@
-import process from '../src/index.js';
+import process, { Insertion, Removal } from '..';
 import { deepEqual } from 'assert';
-import { parse } from 'babylon';
-import buildConfig from 'ast-processor-babylon-config';
+import { parse } from '@babel/parser';
 
 describe('insertions', () => {
-  function check(source: string, expected: Array<{ index: number, content: string }>) {
-    let ast = parse(source, { sourceType: 'module' });
-    let config = buildConfig(source, ast);
-    process(config);
-    deepEqual(expected, config.insertions);
+  function check(source: string, expected: Array<Insertion>) {
+    const ast = parse(source, { sourceType: 'module', tokens: true });
+    const { insertions } = process(source, ast);
+    deepEqual(expected, insertions);
   }
 
   it('inserts a semicolon after expression statements', () =>
@@ -124,11 +122,10 @@ describe('insertions', () => {
 });
 
 describe('removals', () => {
-  function check(source: string, expected: Array<{ start: number, end: number }>) {
-    let ast = parse(source, { sourceType: 'module' });
-    let config = buildConfig(source, ast);
-    process(config);
-    deepEqual(expected, config.removals);
+  function check(source: string, expected: Array<Removal>) {
+    const ast = parse(source, { sourceType: 'module', tokens: true });
+    const { removals } = process(source, ast);
+    deepEqual(expected, removals);
   }
 
   it('removes extra empty statements', () =>
