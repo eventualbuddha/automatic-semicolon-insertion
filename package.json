@@ -1,6 +1,6 @@
 {
   "name": "automatic-semicolon-insertion",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Insert missing semicolons, remove unneeded ones.",
   "main": "src/index.js",
   "directories": {
