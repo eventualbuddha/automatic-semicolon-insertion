@@ -1,12 +1,11 @@
-import process, { Insertion, Removal } from '..';
-import { deepEqual } from 'assert';
+import process, { Insertion, Removal } from '../src';
 import { parse } from '@babel/parser';
 
 describe('insertions', () => {
   function check(source: string, expected: Array<Insertion>) {
     const ast = parse(source, { sourceType: 'module', tokens: true });
     const { insertions } = process(source, ast);
-    deepEqual(expected, insertions);
+    expect(expected).toEqual(insertions);
   }
 
   it('inserts a semicolon after expression statements', () =>
@@ -125,7 +124,7 @@ describe('removals', () => {
   function check(source: string, expected: Array<Removal>) {
     const ast = parse(source, { sourceType: 'module', tokens: true });
     const { removals } = process(source, ast);
-    deepEqual(expected, removals);
+    expect(expected).toEqual(removals);
   }
 
   it('removes extra empty statements', () =>
