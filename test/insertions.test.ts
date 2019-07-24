@@ -1,9 +1,15 @@
 import process, { Insertion, Removal } from '../src';
-import { parse } from '@babel/parser';
+import { parse, ParserOptions } from '@babel/parser';
 
 describe('insertions', () => {
   function check(source: string, expected: Array<Insertion>) {
-    const ast = parse(source, { sourceType: 'module', tokens: true });
+    const ast = parse(source, {
+      sourceType: 'module',
+      tokens: true,
+      // TODO: remove this `keyof` hack once `allowUndeclaredExports` is included in typings
+      // https://github.com/babel/babel/pull/10263
+      ['allowUndeclaredExports' as keyof ParserOptions]: true
+    });
     const { insertions } = process(source, ast);
     expect(expected).toEqual(insertions);
   }
