@@ -1,4 +1,4 @@
-# automatic-semicolon-insertion [![Build Status](https://travis-ci.org/eventualbuddha/automatic-semicolon-insertion.svg?branch=master)](https://travis-ci.org/eventualbuddha/automatic-semicolon-insertion)
+# automatic-semicolon-insertion
 
 Insert missing semicolons, remove unneeded ones.
 
