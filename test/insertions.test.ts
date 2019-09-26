@@ -1,15 +1,9 @@
 import process, { Insertion, Removal } from '../src';
-import { parse, ParserOptions } from '@babel/parser';
+import { parse } from '@codemod/parser';
 
 describe('insertions', () => {
   function check(source: string, expected: Array<Insertion>) {
-    const ast = parse(source, {
-      sourceType: 'module',
-      tokens: true,
-      // TODO: remove this `keyof` hack once `allowUndeclaredExports` is included in typings
-      // https://github.com/babel/babel/pull/10263
-      ['allowUndeclaredExports' as keyof ParserOptions]: true
-    });
+    const ast = parse(source, { tokens: true });
     const { insertions } = process(source, ast);
     expect(expected).toEqual(insertions);
   }
@@ -20,16 +14,13 @@ describe('insertions', () => {
         index: 3,
         content: ';'
       }
-    ])
-  );
-  
+    ]));
+
   it('does not insert a semicolon after statements that have them', () =>
-    check('foo;', [])
-  );
+    check('foo;', []));
 
   it('does not insert semicolons after the init of a `for` loop', () =>
-    check('for (var i = 0; i < 2; i++) {}', [])
-  );
+    check('for (var i = 0; i < 2; i++) {}', []));
 
   it('inserts semicolons after `return` statements', () =>
     check('function foo() { return 21 }', [
@@ -37,8 +28,7 @@ describe('insertions', () => {
         index: 26,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('inserts semicolons after `throw` statements', () =>
     check('throw 1', [
@@ -46,8 +36,7 @@ describe('insertions', () => {
         index: 7,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('inserts semicolons after `continue` statements', () =>
     check('for (;;) { continue }', [
@@ -55,8 +44,7 @@ describe('insertions', () => {
         index: 19,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('inserts semicolons after `do-while` statements', () =>
     check('do {} while (true)', [
@@ -64,8 +52,7 @@ describe('insertions', () => {
         index: 18,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('inserts semicolons after `break` statements', () =>
     check('for (;;) { break }', [
@@ -73,8 +60,7 @@ describe('insertions', () => {
         index: 16,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('inserts semicolons after `debugger` statements', () =>
     check('debugger', [
@@ -82,8 +68,7 @@ describe('insertions', () => {
         index: 8,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('inserts semicolons after `import` statements', () =>
     check('import "foo"', [
@@ -91,8 +76,7 @@ describe('insertions', () => {
         index: 12,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('inserts semicolons after named `export` statements', () =>
     check('export { a }', [
@@ -100,8 +84,7 @@ describe('insertions', () => {
         index: 12,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('inserts semicolons after `export` with a declaration statement', () =>
     check('export var a = 1', [
@@ -109,12 +92,10 @@ describe('insertions', () => {
         index: 16,
         content: ';'
       }
-    ])
-  );
+    ]));
 
   it('does not insert semicolons after `export` with a function declaration', () =>
-    check('export function foo(){}', [])
-  );
+    check('export function foo(){}', []));
 
   it('inserts semicolons after class expression export default statements', () =>
     check('export default class {}', [
@@ -122,8 +103,7 @@ describe('insertions', () => {
         index: 23,
         content: ';'
       }
-    ])
-  );
+    ]));
 });
 
 describe('removals', () => {
@@ -139,24 +119,23 @@ describe('removals', () => {
         start: 2,
         end: 3
       }
-    ])
-  );
+    ]));
 
-  it('leaves empty statements in `for` loops', () =>
-    check('for (;;);', [])
-  );
-  
+  it('leaves empty statements in `for` loops', () => check('for (;;);', []));
+
   it('removes semicolons after method definitions', () =>
-    check('class A { a() {}; }', [{
-      start: 16,
-      end: 17
-    }])
-  );
+    check('class A { a() {}; }', [
+      {
+        start: 16,
+        end: 17
+      }
+    ]));
 
   it('removes semicolons after the start of a class body', () =>
-    check('class A {; a() { b(); } }', [{
-      start: 9,
-      end: 10
-    }])
-  );
+    check('class A {; a() { b(); } }', [
+      {
+        start: 9,
+        end: 10
+      }
+    ]));
 });
