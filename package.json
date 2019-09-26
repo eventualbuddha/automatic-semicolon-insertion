@@ -31,11 +31,11 @@
   },
   "homepage": "https://github.com/eventualbuddha/automatic-semicolon-insertion#readme",
   "dependencies": {
-    "@babel/traverse": "^7.5.5",
-    "@babel/types": "^7.5.5"
+    "@babel/traverse": "^7.6.2",
+    "@babel/types": "^7.6.1"
   },
   "devDependencies": {
-    "@babel/parser": "^7.5.5",
+    "@codemod/parser": "^1.0.3",
     "@types/babel__traverse": "^7.0.7",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.6.8",
@@ -45,7 +45,7 @@
     "typescript": "^3.5.3"
   },
   "resolutions": {
-    "**/@babel/types": "7.5.5"
+    "**/@babel/types": "7.6.1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
