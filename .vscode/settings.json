@@ -1,6 +1,11 @@
 {
   "files.exclude": {
-    "**/*.d.ts": { "when": "$(basename).ts" },
-    "**/*.js": { "when": "$(basename).ts" }
-  }
+    "**/*.d.ts": {
+      "when": "$(basename).ts"
+    },
+    "**/*.js": {
+      "when": "$(basename).ts"
+    }
+  },
+  "typescript.tsdk": ".vscode/pnpify/typescript/lib"
 }
