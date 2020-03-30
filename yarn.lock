@@ -1215,7 +1215,7 @@ __metadata:
     jest: ^24.8.0
     jest-junit: ^7.0.0
     ts-jest: ^24.0.2
-    typescript: ^3.5.3
+    typescript: ^3.8.3
   languageName: unknown
   linkType: soft
 
@@ -6030,23 +6030,23 @@ resolve@1.1.7:
   languageName: node
   linkType: hard
 
-typescript@^3.5.3:
-  version: 3.5.3
-  resolution: "typescript@npm:3.5.3"
+typescript@^3.8.3:
+  version: 3.8.3
+  resolution: "typescript@npm:3.8.3"
   bin:
-    tsc: ./bin/tsc
-    tsserver: ./bin/tsserver
-  checksum: 2/4971be7355f07f517a03fc0dc5f78851d2824e48c79130ee3b12d6aada332d5c66097f1da41d97b91f57e84c952b56e00178bf9c2297cfa3471500e6008cfcd2
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 2/519b11576247fe3570d89a2aa757d8f666aafc0cb9465a6cdd4df09c1dc6bf7285f0c6008d2ac7a55ea26457e767aaab819f58439d80af2cce1d9805b2be1034
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^3.5.3#builtin<compat/typescript>":
-  version: 3.5.3
-  resolution: "typescript@patch:typescript@npm%3A3.5.3#builtin<compat/typescript>::version=3.5.3&hash=270b6c"
+"typescript@patch:typescript@^3.8.3#builtin<compat/typescript>":
+  version: 3.8.3
+  resolution: "typescript@patch:typescript@npm%3A3.8.3#builtin<compat/typescript>::version=3.8.3&hash=270b6c"
   bin:
-    tsc: ./bin/tsc
-    tsserver: ./bin/tsserver
-  checksum: 2/e6216eed069ab7c26a39d539a7b4959c433352e0ad3f07bb528ea2e04e2643998d0c9a60d83578caff042dae00f2b0c154fd5ea438426cb19854b9b84a2d8072
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 2/dd473e358d618597295dced4673462c8a5ddce3a02e31199931444cdf97532548b52282130aa6b3f910b3efff45027ba20a5395908b1bd056fc5ac23f2fc6c81
   languageName: node
   linkType: hard
 
