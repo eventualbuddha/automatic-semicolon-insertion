@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import traverse, { NodePath, Node } from '@babel/traverse';
+import traverse, { NodePath } from '@babel/traverse';
 
 // This should be defined in `@babel/types` but isn't.
 export interface Token {
@@ -47,10 +47,10 @@ export default function process(source: string, ast: t.File): Changes {
   traverse(ast, {
     VariableDeclaration(path: NodePath<t.VariableDeclaration>): void {
       const { node, parent } = path;
-      const isForInit = (
-        (t.isForStatement(parent)  && parent.init === node) ||
-        ((t.isForInStatement(parent) || t.isForOfStatement(parent)) && parent.left === node)
-      );
+      const isForInit =
+        (t.isForStatement(parent) && parent.init === node) ||
+        ((t.isForInStatement(parent) || t.isForOfStatement(parent)) &&
+          parent.left === node);
 
       if (!isForInit) {
         checkForSemicolon(node);
@@ -103,7 +103,10 @@ export default function process(source: string, ast: t.File): Changes {
       const { node } = path;
       const { declaration } = node;
 
-      if (t.isClassDeclaration(declaration) || t.isFunctionDeclaration(declaration)) {
+      if (
+        t.isClassDeclaration(declaration) ||
+        t.isFunctionDeclaration(declaration)
+      ) {
         if (!declaration.id) {
           checkForSemicolon(node);
         }
@@ -165,7 +168,7 @@ export default function process(source: string, ast: t.File): Changes {
     }
   }
 
-  function firstTokenOfNode(node: Node): Token {
+  function firstTokenOfNode(node: t.Node): Token {
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
       if (token.start === node.start) {
@@ -174,11 +177,11 @@ export default function process(source: string, ast: t.File): Changes {
     }
     throw new Error(
       `cannot find first token for node ${node.type} at ` +
-      `${node.loc!.start.line}:${node.loc!.start.column + 1}`
+        `${node.loc!.start.line}:${node.loc!.start.column + 1}`
     );
   }
 
-  function lastTokenOfNode(node: Node): Token {
+  function lastTokenOfNode(node: t.Node): Token {
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
       if (token.end === node.end) {
@@ -187,16 +190,14 @@ export default function process(source: string, ast: t.File): Changes {
     }
     throw new Error(
       `cannot find last token for node ${node.type} at ` +
-      `${node.loc!.start.line}:${node.loc!.start.column + 1}`
+        `${node.loc!.start.line}:${node.loc!.start.column + 1}`
     );
   }
 
   function tokenAfterToken(token: Token): Token {
     const index = tokens.indexOf(token);
     if (index < 0) {
-      throw new Error(
-        `cannot find token in tokens: ${JSON.stringify(token)}`
-      );
+      throw new Error(`cannot find token in tokens: ${JSON.stringify(token)}`);
     }
     return tokens[index + 1];
   }
@@ -213,11 +214,11 @@ export default function process(source: string, ast: t.File): Changes {
     removals.push({ start, end });
   }
 
-  function startOfNode(node: Node): number {
+  function startOfNode(node: t.Node): number {
     return node.start!;
   }
 
-  function endOfNode(node: Node): number {
+  function endOfNode(node: t.Node): number {
     return node.end!;
   }
 
