@@ -2,48 +2,44 @@
   "name": "automatic-semicolon-insertion",
   "version": "0.0.0-development",
   "description": "Insert missing semicolons, remove unneeded ones.",
-  "main": "src/index.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "build": "tsc",
-    "test": "jest",
-    "prepare": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eventualbuddha/automatic-semicolon-insertion.git"
-  },
-  "files": [
-    "src/**/*.js",
-    "src/**/*.d.ts"
-  ],
   "keywords": [
     "asi",
     "js",
     "ast"
   ],
-  "author": "Brian Donovan",
-  "license": "MIT",
+  "homepage": "https://github.com/eventualbuddha/automatic-semicolon-insertion#readme",
   "bugs": {
     "url": "https://github.com/eventualbuddha/automatic-semicolon-insertion/issues"
   },
-  "homepage": "https://github.com/eventualbuddha/automatic-semicolon-insertion#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eventualbuddha/automatic-semicolon-insertion.git"
+  },
+  "license": "MIT",
+  "author": "Brian Donovan",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "rm -rf build && tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepublishOnly": "npm run build"
+  },
   "dependencies": {
-    "@babel/traverse": "^7.6.2",
-    "@babel/types": "^7.6.1"
+    "@babel/traverse": "^7.15.0",
+    "@babel/types": "^7.15.0"
   },
   "devDependencies": {
-    "@codemod/parser": "^1.0.3",
-    "@types/babel__traverse": "^7.0.7",
-    "@types/jest": "^24.0.15",
+    "@codemod/parser": "^1.1.1",
+    "@types/babel__traverse": "^7.14.2",
+    "@types/jest": "^27.0.1",
     "@types/node": "^12.6.8",
-    "@yarnpkg/pnpify": "^2.0.0-rc.19",
-    "jest": "^24.8.0",
-    "jest-junit": "^7.0.0",
-    "ts-jest": "^24.0.2",
-    "typescript": "^3.8.3"
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.3.5"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

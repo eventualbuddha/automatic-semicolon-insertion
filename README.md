@@ -5,8 +5,6 @@ Insert missing semicolons, remove unneeded ones.
 ## Install
 
 ```sh
-$ yarn add automatic-semicolon-insertion
-# or via npm
 $ npm install automatic-semicolon-insertion
 ```
 
