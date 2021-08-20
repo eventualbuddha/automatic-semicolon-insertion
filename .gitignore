@@ -5,8 +5,4 @@ node_modules
 automatic-semicolon-insertion-*.tgz
 !*.config.js
 !*rc.js
-
-# yarn
-!.yarn/**/*
-.yarn/unplugged
-.yarn/build-state.yml
+build

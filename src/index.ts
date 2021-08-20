@@ -1,3 +1,4 @@
+import { strict as assert } from 'assert';
 import * as t from '@babel/types';
 import traverse, { NodePath } from '@babel/traverse';
 
@@ -40,6 +41,10 @@ export interface Changes {
 }
 
 export default function process(source: string, ast: t.File): Changes {
+  assert(
+    ast.tokens,
+    `ast must include .tokens property; pass { tokens: true } to babel.parse`
+  );
   const tokens: Array<Token> = ast.tokens;
   const insertions: Array<Insertion> = [];
   const removals: Array<Removal> = [];
@@ -135,7 +140,7 @@ export default function process(source: string, ast: t.File): Changes {
 
     ClassMethod(path: NodePath<t.ClassMethod>): void {
       checkClassBodyForSemicolon(tokenAfterToken(lastTokenOfNode(path.node)));
-    }
+    },
   });
 
   return { insertions, removals };

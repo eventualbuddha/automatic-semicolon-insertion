@@ -5,6 +5,7 @@
     "module": "commonjs",
     "declaration": true,
     "lib": ["es2015"],
+    "outDir": "build",
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
