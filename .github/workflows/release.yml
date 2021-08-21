@@ -1,4 +1,5 @@
 name: Release
+environment: Release
 on:
   push:
     branches:
