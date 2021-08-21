@@ -1,5 +1,4 @@
 name: Release
-environment: Release
 on:
   push:
     branches:
@@ -7,6 +6,7 @@ on:
 jobs:
   release:
     name: Release
+    environment: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
