@@ -5,7 +5,7 @@
     "module": "commonjs",
     "declaration": true,
     "lib": ["es2015"],
-    "outDir": "build",
+    "outDir": "build/cjs",
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -15,5 +15,7 @@
     "noFallthroughCasesInSwitch": true,
     "suppressImplicitAnyIndexErrors": true,
     "downlevelIteration": true
-  }
+  },
+  "include": ["src"],
+  "exclude": ["**/*.test.ts"]
 }

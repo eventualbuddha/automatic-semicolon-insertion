@@ -1,4 +1,4 @@
-import process, { Insertion, Removal } from '.';
+import { process, Insertion, Removal } from '.';
 import { parse } from '@codemod/parser';
 
 describe('insertions', () => {
