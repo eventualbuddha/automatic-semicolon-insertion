@@ -40,7 +40,7 @@ export interface Changes {
   removals: Array<Removal>;
 }
 
-export default function process(source: string, ast: t.File): Changes {
+export function process(source: string, ast: t.File): Changes {
   assert(
     ast.tokens,
     `ast must include .tokens property; pass { tokens: true } to babel.parse`
