@@ -18,20 +18,21 @@
   },
   "license": "MIT",
   "author": "Brian Donovan",
-  "main": "build/cjs/index.js",
-  "types": "build/cjs/index.d.ts",
+  "main": "build/index.cjs",
+  "module": "build/index.mjs",
+  "types": "build/index.d.ts",
   "exports": {
     ".": {
-      "import": "./build/esm/index.js",
-      "require": "./build/cjs/index.js",
-      "types": "./build/esm/index.d.ts"
+      "types": "./build/index.d.ts",
+      "import": "./build/index.mjs",
+      "require": "./build/index.cjs"
     }
   },
   "files": [
     "build"
   ],
   "scripts": {
-    "build": "rm -rf build && tsc && tsc -p tsconfig.esm.json",
+    "build": "./script/build",
     "test": "jest",
     "test:watch": "jest --watch",
     "prepublishOnly": "npm run build"
