@@ -2,10 +2,10 @@
   "compilerOptions": {
     "strict": true,
     "target": "es2015",
-    "module": "commonjs",
     "declaration": true,
+    "moduleResolution": "node",
     "lib": ["es2015"],
-    "outDir": "build/cjs",
+    "outDir": "build",
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -14,7 +14,9 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "suppressImplicitAnyIndexErrors": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["**/*.test.ts"]
