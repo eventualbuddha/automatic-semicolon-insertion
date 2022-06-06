@@ -1,6 +1,6 @@
-import { strict as assert } from 'assert';
 import * as t from '@babel/types';
-import traverse, { NodePath } from '@babel/traverse';
+import { strict as assert } from 'assert';
+import { traverse } from './traverse.js';
 
 // This should be defined in `@babel/types` but isn't.
 export interface Token {
@@ -40,6 +40,10 @@ export interface Changes {
   removals: Array<Removal>;
 }
 
+/**
+ * Process a source code string and its AST to produce source code insertions
+ * and removals.
+ */
 export function process(source: string, ast: t.File): Changes {
   assert(
     ast.tokens,
@@ -50,8 +54,7 @@ export function process(source: string, ast: t.File): Changes {
   const removals: Array<Removal> = [];
 
   traverse(ast, {
-    VariableDeclaration(path: NodePath<t.VariableDeclaration>): void {
-      const { node, parent } = path;
+    VariableDeclaration(node: t.VariableDeclaration, parent?: t.Node): void {
       const isForInit =
         (t.isForStatement(parent) && parent.init === node) ||
         ((t.isForInStatement(parent) || t.isForOfStatement(parent)) &&
@@ -62,50 +65,49 @@ export function process(source: string, ast: t.File): Changes {
       }
     },
 
-    ExpressionStatement(path: NodePath<t.ExpressionStatement>): void {
-      checkForSemicolon(path.node);
+    ExpressionStatement(node: t.ExpressionStatement): void {
+      checkForSemicolon(node);
     },
 
-    ReturnStatement(path: NodePath<t.ReturnStatement>): void {
-      checkForSemicolon(path.node);
+    ReturnStatement(node: t.ReturnStatement): void {
+      checkForSemicolon(node);
     },
 
-    ThrowStatement(path: NodePath<t.ThrowStatement>): void {
-      checkForSemicolon(path.node);
+    ThrowStatement(node: t.ThrowStatement): void {
+      checkForSemicolon(node);
     },
 
-    DoWhileStatement(path: NodePath<t.DoWhileStatement>): void {
-      checkForSemicolon(path.node);
+    DoWhileStatement(node: t.DoWhileStatement): void {
+      checkForSemicolon(node);
     },
 
-    DebuggerStatement(path: NodePath<t.DebuggerStatement>): void {
-      checkForSemicolon(path.node);
+    DebuggerStatement(node: t.DebuggerStatement): void {
+      checkForSemicolon(node);
     },
 
-    BreakStatement(path: NodePath<t.BreakStatement>): void {
-      checkForSemicolon(path.node);
+    BreakStatement(node: t.BreakStatement): void {
+      checkForSemicolon(node);
     },
 
-    ContinueStatement(path: NodePath<t.ContinueStatement>): void {
-      checkForSemicolon(path.node);
+    ContinueStatement(node: t.ContinueStatement): void {
+      checkForSemicolon(node);
     },
 
-    ImportDeclaration(path: NodePath<t.ImportDeclaration>): void {
-      checkForSemicolon(path.node);
+    ImportDeclaration(node: t.ImportDeclaration): void {
+      checkForSemicolon(node);
     },
 
-    ExportAllDeclaration(path: NodePath<t.ExportAllDeclaration>): void {
-      checkForSemicolon(path.node);
+    ExportAllDeclaration(node: t.ExportAllDeclaration): void {
+      checkForSemicolon(node);
     },
 
-    ExportNamedDeclaration(path: NodePath<t.ExportNamedDeclaration>): void {
-      if (!path.node.declaration) {
-        checkForSemicolon(path.node);
+    ExportNamedDeclaration(node: t.ExportNamedDeclaration): void {
+      if (!node.declaration) {
+        checkForSemicolon(node);
       }
     },
 
-    ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>): void {
-      const { node } = path;
+    ExportDefaultDeclaration(node: t.ExportDefaultDeclaration): void {
       const { declaration } = node;
 
       if (
@@ -120,9 +122,7 @@ export function process(source: string, ast: t.File): Changes {
       }
     },
 
-    EmptyStatement(path: NodePath<t.EmptyStatement>): void {
-      const { node, parent } = path;
-
+    EmptyStatement(node: t.EmptyStatement, parent?: t.Node): void {
       if (
         !t.isForStatement(parent) &&
         !t.isForOfStatement(parent) &&
@@ -134,12 +134,12 @@ export function process(source: string, ast: t.File): Changes {
       }
     },
 
-    ClassBody(path: NodePath<t.ClassBody>): void {
-      checkClassBodyForSemicolon(tokenAfterToken(firstTokenOfNode(path.node)));
+    ClassBody(node: t.ClassBody): void {
+      checkClassBodyForSemicolon(tokenAfterToken(firstTokenOfNode(node)));
     },
 
-    ClassMethod(path: NodePath<t.ClassMethod>): void {
-      checkClassBodyForSemicolon(tokenAfterToken(lastTokenOfNode(path.node)));
+    ClassMethod(node: t.ClassMethod): void {
+      checkClassBodyForSemicolon(tokenAfterToken(lastTokenOfNode(node)));
     },
   });
 

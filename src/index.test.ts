@@ -1,5 +1,5 @@
-import { process, Insertion, Removal } from '.';
 import { parse } from '@codemod/parser';
+import { Insertion, process, Removal } from './index.js';
 
 describe('insertions', () => {
   function check(source: string, expected: Array<Insertion>) {
