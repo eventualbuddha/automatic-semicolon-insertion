@@ -3,6 +3,7 @@
     "strict": true,
     "target": "es2015",
     "declaration": true,
+    "declarationDir": ".",
     "module": "esnext",
     "moduleResolution": "node",
     "lib": ["es2015"],
@@ -19,5 +20,5 @@
     "skipLibCheck": true
   },
   "include": ["src"],
-  "exclude": ["**/*.test.ts"]
+  "exclude": ["build", "**/*.test.ts"]
 }
