@@ -3,6 +3,7 @@
     "strict": true,
     "target": "es2015",
     "declaration": true,
+    "module": "esnext",
     "moduleResolution": "node",
     "lib": ["es2015"],
     "outDir": "build",
@@ -15,7 +16,6 @@
     "noFallthroughCasesInSwitch": true,
     "suppressImplicitAnyIndexErrors": true,
     "downlevelIteration": true,
-    "esModuleInterop": true,
     "skipLibCheck": true
   },
   "include": ["src"],
