@@ -104,6 +104,15 @@ describe('insertions', () => {
         content: ';',
       },
     ]));
+
+  it('handles nodes with children that are null', () => {
+    check('[1, , 3]', [
+      {
+        index: 8,
+        content: ';',
+      },
+    ]);
+  });
 });
 
 describe('removals', () => {
