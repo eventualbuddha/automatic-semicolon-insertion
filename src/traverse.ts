@@ -42,10 +42,14 @@ export function traverse(ast: t.File, visitor: Visitor): void {
       const fields = Object.keys(t.NODE_FIELDS[type]);
 
       for (const field of fields) {
-        const value = node[field];
+        const value = node[field] as t.Node | (t.Node | null)[] | null;
 
         if (Array.isArray(value)) {
-          queue.push(...value.map<QueueItem>((child) => [node, child]));
+          for (const item of value) {
+            if (item) {
+              queue.push([node, item]);
+            }
+          }
         } else if (value) {
           queue.push([node, value]);
         }
